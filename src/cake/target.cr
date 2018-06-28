@@ -6,11 +6,11 @@ class Cake::Target
   def initialize(@name : String, @deps : Array(String), @desc : String, &@build : Env ->)
   end
   
-  def build(env : Env)
+  def build(env : Env) : Bool
     rebuild = false
 
     if Targets::INSTANCE.phony.includes?(@name)
-      rebuilt = true
+      rebuild = true
     end
 
     begin
@@ -34,7 +34,7 @@ class Cake::Target
       if env.verbose
         puts "Target #{@name} up to date"
       end
-      return
+      return false
     end
 
     if env.verbose
@@ -42,5 +42,6 @@ class Cake::Target
     end
 
     @build.call(env)
+    true
   end
 end
