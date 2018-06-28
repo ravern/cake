@@ -1,0 +1,21 @@
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
+
+# Created by https://www.gitignore.io/api/crystal
+
+### Crystal ###
+/docs/
+/lib/
+/bin/
+/.shards/
+*.dwarf
+
+# Libraries don't need dependency lock
+# Dependencies will be locked in application that uses them
+#/shard.lock
+
+
+# End of https://www.gitignore.io/api/crystal
+
+# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+
+lib

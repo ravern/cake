@@ -1,0 +1,3 @@
+require "cake"
+
+Cake.run
