@@ -5,6 +5,7 @@ class Cake::CLI
     property verbose = false
     property timeout = 0
     property command = :build
+    property args = [] of String
   end
 
   def initialize
@@ -17,6 +18,7 @@ class Cake::CLI
     @parser.on("-t", "--timeout SECONDS", "Duration before file is outdated") do |timeout|
       @options.timeout = timeout.to_i? || raise OptionParser::InvalidOption.new("--timeout")
     end
+    @parser.unknown_args { |args| @options.args = args }
   end
 
   def run
@@ -30,14 +32,30 @@ class Cake::CLI
       return help
     end
 
+    if @options.args.empty?
+      if Targets::INSTANCE.all.empty?
+        return help(ValidationError.new("No targets provided"))
+      end
+      @options.args << Targets::INSTANCE.all.first_value.name
+    end
+
     begin
-      Targets::INSTANCE.validate
+      Targets::INSTANCE.validate(@options.args)
     rescue exception : ValidationError
       return help(exception)
     end
 
     if @options.command == :list
       return list
+    end
+
+    env = Env.new(
+      @options.verbose,
+      @options.timeout
+    )
+
+    @options.args.each do |name|
+      Targets::INSTANCE.all[name].build(env)
     end
   end
 

@@ -41,11 +41,11 @@ require "cake"
 default "two"
 phony "one"
 
-target "one", desc: "Being first isn't everything" do |ctx|
+target "one", desc: "Being first isn't everything" do |env|
   puts "Building one..."
 end
 
-target "two", deps: ["one"], desc: "Being the second is nothing" do |ctx|
+target "two", deps: ["one"], desc: "Being the second is nothing" do |env|
   puts "Building two..."
 end
 
