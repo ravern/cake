@@ -1,3 +1,5 @@
+![TravisCI](https://travis-ci.org/cakefile/cake.svg?branch=master)
+
 # Cake
 
 <img alt="Logo" src="assets/logo.png" width="128px" />
