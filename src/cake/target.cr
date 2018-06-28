@@ -1,0 +1,2 @@
+class Cake::Target
+end
