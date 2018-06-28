@@ -1,7 +1,7 @@
 require "cake"
 
-target "one" do |env|
-  File.touch("one")
+target "some_binary" do |env|
+  puts "nothing"
 end
 
 Cake.run

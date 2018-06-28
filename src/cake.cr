@@ -9,14 +9,14 @@ module Cake
       super(message, cause)
     end
 
-    def initialize(not_found_target : String, needed_by_target : String? = nil)
+    def initialize(not_found : String, needed_by : String? = nil)
       super(String.build do |s|
         s << "Target "
-        s << not_found_target
+        s << not_found
         s << " not found"
-        if needed_by_target
+        if needed_by
           s << " needed by "
-          s << needed_by_target
+          s << needed_by
         end
       end)
     end
@@ -31,12 +31,18 @@ module Cake
 
     def validate(names : Array(String))
       names.each do |name|
-        all[name]? || raise ValidationError.new(name)
+        all[name]? || raise ValidationError.new(not_found: name)
+      end
+
+      if default = @default
+        all[default]? || raise ValidationError.new(not_found: default)
       end
 
       all.each do |name, target|
         target.deps.each do |dep|
-          all[dep]? || raise ValidationError.new(dep, target.name)
+          if !all[dep]? && !File.file?(dep)
+            raise ValidationError.new(dep, target.name)
+          end
         end
       end
     end

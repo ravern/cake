@@ -1,7 +1,4 @@
 struct Cake::Env
-  property verbose
-  property timeout
-
-  def initialize(@verbose : Bool, @timeout : Int32)
-  end
+  property verbose = false
+  protected property timeout = 5
 end
