@@ -58,7 +58,7 @@ class Cake::CLI
     puts Targets::INSTANCE.to_s
   end
 
-  private def help(exception : Exception? = nil)
+  private def help(exception : ::Exception? = nil)
     if exception
       puts "Error: #{exception.message}"
     end
