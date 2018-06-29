@@ -21,7 +21,7 @@ module Cake
       super(String.build do |s|
         s << "Target "
         s << not_found
-        s << " not found"
+        s << " not found,"
         if needed_by
           s << " needed by "
           s << needed_by

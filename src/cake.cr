@@ -1,8 +1,4 @@
-require "./cake/error"
-require "./cake/dsl"
-require "./cake/env"
-require "./cake/target"
-require "./cake/cli"
+require "./cake/*"
 
 module Cake
   private class Targets
@@ -36,7 +32,7 @@ module Cake
   end
 
   def self.run
-    Cake::CLI.new.run
+    CLI.new.run
   end
 end
 
