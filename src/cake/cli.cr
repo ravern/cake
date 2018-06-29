@@ -4,7 +4,7 @@ class Cake::CLI
   def initialize
     @env = Env.new
     @command = :build
-    @args = [] of String
+    @targets = [] of String
 
     @parser = OptionParser.new
     @parser.banner = "Usage: cake [options] [targets]"
@@ -14,7 +14,10 @@ class Cake::CLI
     @parser.on("-t", "--timeout SECONDS", "Duration before file is outdated") do |timeout|
       @env.timeout = timeout.to_i? || raise OptionParser::InvalidOption.new("--timeout")
     end
-    @parser.unknown_args { |args| @args = args }
+    @parser.unknown_args do |targets, args|
+      @targets = targets
+      @env.args = args
+    end
   end
 
   def run
@@ -28,18 +31,16 @@ class Cake::CLI
       return help
     end
 
-    if @args.empty?
+    if @targets.empty?
       if default = Targets::INSTANCE.default
-        @args << default
-      elsif Targets::INSTANCE.all.empty?
-        return help(ValidationError.new("No targets provided"))
-      else
-        @args << Targets::INSTANCE.all.first_value.name
+        @targets << default
+      elsif target = Targets::INSTANCE.all.first_value?
+        @targets << target.name
       end
     end
 
     begin
-      Targets::INSTANCE.validate(@args)
+      Targets::INSTANCE.validate(@targets)
     rescue exception : ValidationError
       return help(exception)
     end
@@ -48,7 +49,7 @@ class Cake::CLI
       return list
     end
 
-    @args.each do |name|
+    @targets.each do |name|
       Targets::INSTANCE.all[name].build(@env)
     end
   end

@@ -30,6 +30,10 @@ module Cake
     property all = {} of String => Target
 
     def validate(names : Array(String))
+      if all.empty?
+        raise ValidationError.new("No targets defined.")
+      end
+
       names.each do |name|
         all[name]? || raise ValidationError.new(not_found: name)
       end
@@ -52,3 +56,5 @@ module Cake
     Cake::CLI.new.run
   end
 end
+
+extend Cake::DSL

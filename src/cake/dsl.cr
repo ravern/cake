@@ -18,5 +18,3 @@ module Cake::DSL
     Targets::INSTANCE.all[name] = Target.new(name.to_s, deps, desc, &block)
   end
 end
-
-extend Cake::DSL
