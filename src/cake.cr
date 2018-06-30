@@ -5,7 +5,7 @@ module Cake
     INSTANCE = new
 
     property default : String?
-    property phony = [] of String
+    property phonies = [] of String
     property all = {} of String => Target
 
     def validate(names : Array(String))
@@ -14,11 +14,15 @@ module Cake
       end
 
       names.each do |name|
-        all[name]? || raise NotFoundError.new(name)
+        unless all[name]?
+          raise NotFoundError.new(name)
+        end
       end
 
       if default = @default
-        all[default]? || raise NotFoundError.new(default)
+        unless all[default]?
+          raise NotFoundError.new(default)
+        end
       end
 
       all.each do |name, target|

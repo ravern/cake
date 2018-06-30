@@ -1,3 +1,5 @@
+require "process"
+
 module Cake::DSL
   # Sets the given target to be the default target.
   #
@@ -12,18 +14,33 @@ module Cake::DSL
   # Phony targets are targets that will always be rebuilt, no matter when their
   # files exist or when their dependencies are not rebuilt.
   def phony(name : String | Symbol)
-    Targets::INSTANCE.phony << name.to_s
-  end
-
-  # Adds the given targets to the phony targets.
-  #
-  # See `phony(name : String)` for more information.
-  def phony(names : Array(String | Symbol))
-    Targets::INSTANCE.phony += names.map(&.to_s)
+    Targets::INSTANCE.phonies << name.to_s
   end
 
   # Defines a new target.
   def target(name : String | Symbol, deps : Array(String | Symbol) = [] of String | Symbol, desc : String = "", &build : Env ->)
-    Targets::INSTANCE.all[name] = Target.new(name.to_s, deps.map(&.to_s), desc, &build)
+    Targets::INSTANCE.all[name.to_s] = Target.new(name.to_s, deps.map(&.to_s), desc, &build)
+  end
+
+  # Runs an external command.
+  #
+  # Raises a `BuildError` if an error occured while running. If the `quiet` flag
+  # is set, the command that was run will not be displayed.
+  def run(command : String, args = nil, env : Process::Env = nil, clear_env : Bool = false, shell : Bool = false, input : Process::Stdio = Process::Redirect::Close, output : Process::Stdio = Process::Redirect::Close, error : Process::Stdio = Process::Redirect::Close, chdir : String? = nil, quiet : Bool = false)
+    unless quiet
+      STDOUT << "#{command} "
+      args.each do |arg|
+        quote = arg.includes?(' ') ? "'" : ""
+        STDOUT << "#{quote}#{arg}#{quote} "
+      end
+      STDOUT << "\n"
+    end
+
+    status = Process.run(command, args, env, clear_env, shell, input, output, error, chdir)
+    if !status.normal_exit?
+      raise RunError.new(abnormal: true)
+    elsif !status.success?
+      raise RunError.new(exit_code: status.exit_code)
+    end
   end
 end

@@ -20,7 +20,7 @@ module Cake
 
       rebuild = false
 
-      if Targets::INSTANCE.phony.includes?(@name)
+      if Targets::INSTANCE.phonies.includes?(@name)
         rebuild = true
       end
 

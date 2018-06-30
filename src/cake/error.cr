@@ -11,10 +11,15 @@ module Cake
   #
   # It includes the exit code of the shell command that failed to run.
   class RunError < BuildError
-    getter code
+    getter abnormal = nil
+    getter exit_code = nil
 
-    def initialize(@code : Int32)
-      super("Exited with error code #{code}")
+    def initialize(@abnormal : Bool)
+      super("Exited abnormally")
+    end
+
+    def initialize(@exit_code : Int32)
+      super("Exited with exit code #{@exit_code}")
     end
   end
 
@@ -33,11 +38,11 @@ module Cake
     def initialize(@not_found : String, @needed_by : String? = nil)
       super(String.build do |s|
         s << "Target "
-        s << not_found
-        s << " not found,"
+        s << @not_found
+        s << " not found"
         if needed_by
-          s << " needed by "
-          s << needed_by
+          s << ", needed by "
+          s << @needed_by
         end
       end)
     end
