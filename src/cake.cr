@@ -31,6 +31,7 @@ module Cake
     end
   end
 
+  # Runs the program.
   def self.run
     CLI.new.run
   end

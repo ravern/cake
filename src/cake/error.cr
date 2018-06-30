@@ -1,21 +1,34 @@
 module Cake
+  # All errors raised will inherit from `Error`.
   class Error < Exception
   end
 
+  # Raised when an error occurs inside `build` block of a `Target`.
   class BuildError < Error
-    property code
+  end
+
+  # Raised when an error occurs while running a shell command.
+  #
+  # It includes the exit code of the shell command that failed to run.
+  class RunError < BuildError
+    getter code
 
     def initialize(@code : Int32)
       super("Exited with error code #{code}")
     end
   end
 
+  # Raised when target definition is invalid.
   class ValidationError < Error
   end
 
+  # Raised when a target is not found.
+  #
+  # It can also include whether the target that was not found was a dependency
+  # of another target, indicated by `needed_by`.
   class NotFoundError < ValidationError
-    property not_found
-    property needed_by
+    getter not_found
+    getter needed_by
 
     def initialize(@not_found : String, @needed_by : String? = nil)
       super(String.build do |s|

@@ -1,9 +1,24 @@
-struct Cake::Env
-  property verbose = false
-  property timeout = 5
-  property args = [] of String
+module Cake
+  # Represents an environment for building a target.
+  struct Env
+    # Returns whether the output should be verbose.
+    getter verbose = false
+    protected setter verbose
 
-  property name = ""
-  property deps = [] of String
-  property modified_deps = [] of String
+    # Returns the arguments that were passed after the `--`.
+    getter args = [] of String
+    protected setter args
+
+    # Returns the name of the target.
+    getter name = ""
+    protected setter name
+
+    # Returns the dependencies.
+    getter deps = [] of String
+    protected setter deps
+
+    # Returns the file dependencies that were modified.
+    getter modified_deps = [] of String
+    protected setter modified_deps
+  end
 end

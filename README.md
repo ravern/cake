@@ -2,7 +2,7 @@
 
 # Cake
 
-<img alt="Logo" src="assets/logo.png" width="128px" />
+![Logo](https://avatars2.githubusercontent.com/u/40494794?s=200&v=4)
 
 Build utility for Crystal.
 
