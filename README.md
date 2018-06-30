@@ -1,6 +1,6 @@
-![TravisCI](https://travis-ci.org/cakefile/cake.svg?branch=master)
-
 # Cake
+
+![TravisCI](https://travis-ci.org/cakefile/cake.svg?branch=master)
 
 ![Logo](https://avatars2.githubusercontent.com/u/40494794?s=200&v=4)
 
@@ -16,8 +16,9 @@ build utility similar to Make.*
 ## Installation
 
 `cake` does not build an executable. Instead, a simple `alias` can be defined
-in `.bash_profile`. Common names for the file include `Cakefile`, `cakefile` 
+in `.bash_profile`. Common names for the file include `Cakefile`, `cakefile`
 or `cakefile.cr`.
+
 ```bash
 alias cake="crystal Cakefile --"
 ```
@@ -26,6 +27,7 @@ alias cake="crystal Cakefile --"
 
 `cake` must first be installed as a development dependency using `shards
 install`.
+
 ```yaml
 development_dependencies:
   cake:
@@ -35,17 +37,18 @@ development_dependencies:
 
 The targets have to be specified in a file. The following shows a simple
 `Cakefile`.
+
 ```crystal
 require "cake"
 
-default "two"
-phony "one"
+default :two
+phony :one
 
-target "one", desc: "Being first isn't everything" do |env|
+target :one, desc: "Being first isn't everything" do |env|
   puts "Building one..."
 end
 
-target "two", deps: ["one"], desc: "Being the second is nothing" do |env|
+target :two, deps: [:one], desc: "Being the second is nothing" do |env|
   puts "Building two..."
 end
 
@@ -54,6 +57,7 @@ Cake.run
 
 `cake` can be used to build the targets. Ensure that it is run in the same
 directory as the `Cakefile`.
+
 ```bash
 $ cake one
 Building one...
@@ -67,10 +71,11 @@ Building one...
 Building two...
 ```
 
-# Development
+## Development
 
 When developing for `cake`, it needs to be installed in the `lib` folder.
 Thus, symlinks can be used.
+
 ```bash
 $ cd lib/
 $ ln -s ../src/cake
