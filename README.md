@@ -1,8 +1,8 @@
 # Cake
 
-![TravisCI](https://travis-ci.org/cakefile/cake.svg?branch=master)
+[![TravisCI](https://travis-ci.org/cakefile/cake.svg?branch=master)](https://travis-ci.org/cakefile/cake)
 
-![Logo](https://avatars2.githubusercontent.com/u/40494794?s=200&v=4)
+[![Logo](https://avatars2.githubusercontent.com/u/40494794?s=200&v=4)](https://cakefile.xyz)
 
 Build utility for Crystal.
 
