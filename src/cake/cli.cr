@@ -12,9 +12,6 @@ module Cake
       @parser.on("-h", "--help", "Print usage and help information") { @command = :help }
       @parser.on("-v", "--verbose", "Print more information about build") { @env.verbose = true }
       @parser.on("-l", "--list", "Lists information about targets") { @command = :list }
-      @parser.on("-t", "--timeout SECONDS", "Duration before file is outdated") do |timeout|
-        @env.timeout = timeout.to_i? || raise OptionParser::InvalidOption.new("--timeout")
-      end
       @parser.unknown_args do |targets, args|
         @targets = targets
         @env.args = args
