@@ -48,7 +48,11 @@ module Cake
       end
 
       @targets.each do |name|
-        Targets::INSTANCE.all[name].build(@env)
+        begin
+          Targets::INSTANCE.all[name].build(@env)
+        rescue exception : BuildError
+          puts "Error: #{exception.message}"
+        end
       end
     end
 

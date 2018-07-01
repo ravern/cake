@@ -26,17 +26,17 @@ module Cake::DSL
   #
   # Raises a `BuildError` if an error occured while running. If the `quiet` flag
   # is set, the command that was run will not be displayed.
-  def run(command : String, args = nil, env : Process::Env = nil, clear_env : Bool = false, shell : Bool = false, input : Process::Stdio = Process::Redirect::Close, output : Process::Stdio = Process::Redirect::Close, error : Process::Stdio = Process::Redirect::Close, chdir : String? = nil, quiet : Bool = false)
+  def run(command : String, args = nil, env : Process::Env = nil, clear_env : Bool = false, shell : Bool = false, input : Bool = true, output : Bool = true, error : Bool = true, chdir : String? = nil, quiet : Bool = false)
     unless quiet
       STDOUT << "#{command} "
       args.each do |arg|
-        quote = arg.includes?(' ') ? "'" : ""
+        quote = arg.empty? || /.*[@&$*! ].*/.match(arg) ? "'" : ""
         STDOUT << "#{quote}#{arg}#{quote} "
       end
       STDOUT << "\n"
     end
 
-    status = Process.run(command, args, env, clear_env, shell, input, output, error, chdir)
+    status = Process.run(command, args, env, clear_env, shell, input ? STDIN : Process::Redirect::Close, output ? STDOUT : Process::Redirect::Close, error ? STDERR : Process::Redirect::Close, chdir)
     if !status.normal_exit?
       raise RunError.new(abnormal: true)
     elsif !status.success?
