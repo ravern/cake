@@ -39,6 +39,19 @@ module Cake
         end
       end
     end
+
+    def to_s(io : IO)
+      io << "Targets:\n"
+      @all.each_value do |target|
+        io << "    "
+        io << target.name
+        (33 - target.name.size).times do
+          io << ' '
+        end
+        io << target.desc
+        io << '\n'
+      end
+    end
   end
 
   # Runs the program.
