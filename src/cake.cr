@@ -9,25 +9,31 @@ module Cake
     property all = {} of String => Target
 
     def validate(names : Array(String))
-      if all.empty?
+      if @all.empty?
         raise ValidationError.new("No targets defined")
       end
 
       names.each do |name|
-        unless all[name]?
+        unless @all[name]?
           raise NotFoundError.new(name)
         end
       end
 
       if default = @default
-        unless all[default]?
+        unless @all[default]?
           raise NotFoundError.new(default)
         end
       end
 
-      all.each do |name, target|
+      @phonies.each do |name|
+        unless @all[name]?
+          raise NotFoundError.new(name)
+        end
+      end
+
+      @all.each do |name, target|
         target.deps.each do |dep|
-          if !all[dep]? && !File.file?(dep)
+          if !@all[dep]? && !File.file?(dep)
             raise NotFoundError.new(dep, target.name)
           end
         end
