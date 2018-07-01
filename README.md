@@ -15,7 +15,7 @@ build utility similar to Make.*
 
 ## Installation
 
-`cake` does not build an executable. Instead, a simple `alias` can be defined
+`cake` does not build an executable. Instead, a simple `alias` should be defined
 in `.bash_profile`. Common names for the file include `Cakefile`, `cakefile`
 or `cakefile.cr`.
 
@@ -42,14 +42,15 @@ The targets have to be specified in a file. The following shows a simple
 require "cake"
 
 default :two
-phony :one
 
+phony :one
 target :one, desc: "Being first isn't everything" do |env|
-  puts "Building one..."
+  run "echo", ["Or is it really?"]
 end
 
+phony :two
 target :two, deps: [:one], desc: "Being the second is nothing" do |env|
-  puts "Building two..."
+  run "echo", ["Or so it was..."]
 end
 
 Cake.run
@@ -59,22 +60,39 @@ Cake.run
 directory as the `Cakefile`.
 
 ```bash
+# Builds target one
 $ cake one
-Building one...
+echo 'Or is it really?'
+Or is it really?
 
+# Builds target two and target one (dependency)
 $ cake two
-Building one...
-Building two...
+echo 'Or is it really?'
+Or is it really?
+echo 'Or so it was...'
+Or so it was...
 
+# `cake` alone builds the default target
 $ cake
-Building one...
-Building two...
+echo 'Or is it really?'
+Or is it really?
+echo 'Or so it was...'
+Or so it was...
+
+# Verbose flag can print more information
+$ cake -v
+Building target one...
+echo 'Or is it really?'
+Or is it really?
+Building target two...
+echo 'Or so it was...'
+Or so it was...
 ```
 
 ## Development
 
 When developing for `cake`, it needs to be installed in the `lib` folder.
-Thus, symlinks can be used.
+Thus, symlinks can be used to "install" it in the `lib` folder..
 
 ```bash
 $ cd lib/
