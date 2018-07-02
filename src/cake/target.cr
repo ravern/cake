@@ -1,8 +1,13 @@
 module Cake
   # Represents a target to be built.
   class Target
+    # Returns the name of the target.
     getter name
+
+    # Returns the dependencies of the target.
     getter deps
+
+    # Returns the description of the target.
     getter desc
 
     def initialize(@name : String, @deps : Array(String), @desc : String, &@build : Env ->)
