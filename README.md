@@ -16,11 +16,11 @@ build utility similar to Make.*
 ## Installation
 
 `cake` does not build an executable. Instead, a simple `alias` should be defined
-in `.bash_profile`. Common names for the file include `Cakefile`, `cakefile`
-or `cakefile.cr`.
+in `.bash_profile`. Common names for the file include `cakefile.cr`, `cakefile`
+or `Cakefile`.
 
 ```bash
-alias cake="crystal Cakefile --"
+alias cake="crystal cakefile.cr --"
 ```
 
 ## Usage
