@@ -10,8 +10,8 @@ Since we write our programs in Crystal, it is not too far fetched to write our
 build tasks in Crystal too. Furthermore, Crystal libraries and frameworks can
 be used also, which is sometimes beneficial.
 
-*This tool does not intend to be compatible with Rake. It is simply a
-build utility similar to Make.*
+*This tool does not intend to be compatible with Rake. It is simply a build
+utility similar to Make.*
 
 ## Installation
 
@@ -21,6 +21,17 @@ or `Cakefile`.
 
 ```bash
 alias cake="crystal cakefile.cr --"
+```
+
+## Development
+
+When developing `cake`, it needs to be installed in its own `lib` folder. Thus,
+symlinks can be used to "install" it in the `lib` folder..
+
+```bash
+$ cd lib/
+$ ln -s ../src/cake
+$ ln -s ../src/cake.cr
 ```
 
 ## Usage
@@ -87,15 +98,4 @@ Or is it really?
 Building target two...
 echo 'Or so it was...'
 Or so it was...
-```
-
-## Development
-
-When developing for `cake`, it needs to be installed in the `lib` folder.
-Thus, symlinks can be used to "install" it in the `lib` folder..
-
-```bash
-$ cd lib/
-$ ln -s ../src/cake
-$ ln -s ../src/cake.cr
 ```
