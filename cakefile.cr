@@ -2,7 +2,7 @@ require "cake"
 
 default :test
 
-phony :test
+phony [:test, :docs]
 target :test, desc: "Run tests" do |env|
   run "crystal", ["spec"]
 end

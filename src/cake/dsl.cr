@@ -16,30 +16,29 @@ module Cake::DSL
   #
   # Phony targets are targets that will always be rebuilt, no matter when their
   # files exist or when their dependencies are not rebuilt.
-  def phony(name : Name | Array(Name))
-    case name
-    when Name
-      names = [name]
-    else
-      names = name
-    end
-
+  def phony(name_or_names : Name | Array(Name))
+    names = to_names(name_or_names)
     Targets::INSTANCE.phonies += names.map(&.to_s)
   end
 
   # Defines a new target.
-  def target(name : Name | Array(Name), deps : Array(Name) = [] of Name, desc : String = "", &build : Env ->)
-    case name
-    when Name
-      names = [name]
-    else
-      names = name
-    end
-
+  def target(name_or_names : Name | Array(Name), deps : Array(Name) = [] of Name, desc : String = "", &build : Env ->)
+    names = to_names(name_or_names)
     names.each do |name|
       name = name.to_s
       deps = deps.map(&.to_s)
       Targets::INSTANCE.all[name] = Target.new(name, deps, desc, &build)
+    end
+  end
+
+  private def to_names(name_or_names : Name | Array(Name) | Array(String) | Array(Symbol)) : Array(Name)
+    case name_or_names
+    when Name
+      return [name_or_names.as(Name)]
+    when Array(Name)
+      return name_or_names
+    else
+      return name_or_names.map(&.as(Name))
     end
   end
 
