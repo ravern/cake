@@ -51,7 +51,7 @@ module Cake::DSL
     unless quiet
       STDOUT << "#{command} "
       args.each do |arg|
-        quote = arg.empty? || /.*[@&$*! ].*/.match(arg) ? "'" : ""
+        quote = (arg.empty? || /.*[@&$*! ].*/.match(arg)) ? "'" : ""
         STDOUT << "#{quote}#{arg}#{quote} "
       end
       STDOUT << "\n"
