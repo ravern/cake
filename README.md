@@ -1,8 +1,8 @@
 # Cake
 
-[![TravisCI](https://travis-ci.org/cakefile/cake.svg?branch=master)](https://travis-ci.org/cakefile/cake)
+[![TravisCI](https://travis-ci.org/ravernkoh/cake.svg?branch=master)](https://travis-ci.org/ravernkoh/cake)
 
-[![Logo](https://avatars2.githubusercontent.com/u/40494794?s=200&v=4)](https://cakefile.xyz)
+[![Logo](https://avatars2.githubusercontent.com/u/40494794?s=200&v=4)](https://ravernkoh.github.io/cake)
 
 Build utility for Crystal.
 
@@ -10,8 +10,8 @@ Since we write our programs in Crystal, it is not too far fetched to write our
 build tasks in Crystal too. Furthermore, Crystal libraries and frameworks can
 be used also, which is sometimes beneficial.
 
-*This tool does not intend to be compatible with Rake. It is simply a build
-utility similar to Make.*
+_This tool does not intend to be compatible with Rake. It is simply a build
+utility similar to Make._
 
 ## Installation
 
@@ -36,13 +36,12 @@ $ ln -s ../src/cake.cr
 
 ## Usage
 
-`cake` must first be installed as a development dependency using `shards
-install`.
+`cake` must first be installed as a development dependency using `shards install`.
 
 ```yaml
 development_dependencies:
   cake:
-    git: https://github.com/cakefile/cake.git
+    git: https://github.com/ravernkoh/cake.git
     branch: master
 ```
 
