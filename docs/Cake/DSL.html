@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/cakefile/cake">
+  <title>Cake::DSL - github.com/cakefile/cake</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/cakefile/cake/Cake" data-name="cake">
+      <a href="../Cake.html">Cake</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/BuildError" data-name="cake::builderror">
+      <a href="../Cake/BuildError.html">BuildError</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/cakefile/cake/Cake/DSL" data-name="cake::dsl">
+      <a href="../Cake/DSL.html">DSL</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/DSL/Name" data-name="cake::dsl::name">
+      <a href="../Cake/DSL/Name.html">Name</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/Env" data-name="cake::env">
+      <a href="../Cake/Env.html">Env</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/Error" data-name="cake::error">
+      <a href="../Cake/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/NotFoundError" data-name="cake::notfounderror">
+      <a href="../Cake/NotFoundError.html">NotFoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/RunError" data-name="cake::runerror">
+      <a href="../Cake/RunError.html">RunError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/Target" data-name="cake::target">
+      <a href="../Cake/Target.html">Target</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/ValidationError" data-name="cake::validationerror">
+      <a href="../Cake/ValidationError.html">ValidationError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> Cake::DSL
+
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/cakefile/cake/blob/39273904858e229fd1d66526a78169ee82b982e8/src/cake/dsl.cr#L3" target="_blank">cake/dsl.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#default%28name%3AName%29-instance-method" class="signature"><strong>#default</strong>(name : Name)</a>
+        
+          <div class="summary"><p>Sets the given target to be the default target.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#phony%28name_or_names%3AName%7CArray%28Name%29%29-instance-method" class="signature"><strong>#phony</strong>(name_or_names : Name | Array(Name))</a>
+        
+          <div class="summary"><p>Adds the given target to the phony targets.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#run%28command%3AString%2Cargs%3Dnil%2Cenv%3AProcess%3A%3AEnv%3Dnil%2Cclear_env%3ABool%3Dfalse%2Cshell%3ABool%3Dfalse%2Cinput%3ABool%3Dtrue%2Coutput%3ABool%3Dtrue%2Cerror%3ABool%3Dtrue%2Cchdir%3AString%3F%3Dnil%2Cquiet%3ABool%3Dfalse%29-instance-method" class="signature"><strong>#run</strong>(command : String, args = <span class="n">nil</span>, env : Process::Env = <span class="n">nil</span>, clear_env : Bool = <span class="n">false</span>, shell : Bool = <span class="n">false</span>, input : Bool = <span class="n">true</span>, output : Bool = <span class="n">true</span>, error : Bool = <span class="n">true</span>, chdir : String? = <span class="n">nil</span>, quiet : Bool = <span class="n">false</span>)</a>
+        
+          <div class="summary"><p>Runs an external command.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#target%28name_or_names%3AName%7CArray%28Name%29%2Cdeps%3AArray%28Name%29%3D%5B%5DofName%2Cdesc%3AString%3D%26quot%3B%26quot%3B%2C%26build%3AEnv-%3E%29-instance-method" class="signature"><strong>#target</strong>(name_or_names : Name | Array(Name), deps : Array(Name) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Name</span>, desc : String = <span class="s">&quot;&quot;</span>, &build : Env -> )</a>
+        
+          <div class="summary"><p>Defines a new target.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+</div>
+
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="default(name:Name)-instance-method">
+      <div class="signature">
+        
+        def <strong>default</strong>(name : <a href="../Cake/DSL/Name.html">Name</a>)
+
+        <a class="method-permalink" href="#default%28name%3AName%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Sets the given target to be the default target.</p>
+
+<p>If a default target is not set, it is automatically set to the first target
+that was defined.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/cakefile/cake/blob/39273904858e229fd1d66526a78169ee82b982e8/src/cake/dsl.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="phony(name_or_names:Name|Array(Name))-instance-method">
+      <div class="signature">
+        
+        def <strong>phony</strong>(name_or_names : <a href="../Cake/DSL/Name.html">Name</a> | Array(<a href="../Cake/DSL/Name.html">Name</a>))
+
+        <a class="method-permalink" href="#phony%28name_or_names%3AName%7CArray%28Name%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Adds the given target to the phony targets.</p>
+
+<p>Phony targets are targets that will always be rebuilt, no matter when their
+files exist or when their dependencies are not rebuilt.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/cakefile/cake/blob/39273904858e229fd1d66526a78169ee82b982e8/src/cake/dsl.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="run(command:String,args=nil,env:Process::Env=nil,clear_env:Bool=false,shell:Bool=false,input:Bool=true,output:Bool=true,error:Bool=true,chdir:String?=nil,quiet:Bool=false)-instance-method">
+      <div class="signature">
+        
+        def <strong>run</strong>(command : String, args = <span class="n">nil</span>, env : Process::Env = <span class="n">nil</span>, clear_env : Bool = <span class="n">false</span>, shell : Bool = <span class="n">false</span>, input : Bool = <span class="n">true</span>, output : Bool = <span class="n">true</span>, error : Bool = <span class="n">true</span>, chdir : String? = <span class="n">nil</span>, quiet : Bool = <span class="n">false</span>)
+
+        <a class="method-permalink" href="#run%28command%3AString%2Cargs%3Dnil%2Cenv%3AProcess%3A%3AEnv%3Dnil%2Cclear_env%3ABool%3Dfalse%2Cshell%3ABool%3Dfalse%2Cinput%3ABool%3Dtrue%2Coutput%3ABool%3Dtrue%2Cerror%3ABool%3Dtrue%2Cchdir%3AString%3F%3Dnil%2Cquiet%3ABool%3Dfalse%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Runs an external command.</p>
+
+<p>Raises a <code><a href="../Cake/RunError.html">RunError</a></code> if an error occured while running. If the <code>quiet</code> flag
+is set, the command that was run will not be displayed.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/cakefile/cake/blob/39273904858e229fd1d66526a78169ee82b982e8/src/cake/dsl.cr#L49" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="target(name_or_names:Name|Array(Name),deps:Array(Name)=[]ofName,desc:String=&amp;quot;&amp;quot;,&amp;build:Env-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>target</strong>(name_or_names : <a href="../Cake/DSL/Name.html">Name</a> | Array(<a href="../Cake/DSL/Name.html">Name</a>), deps : Array(<a href="../Cake/DSL/Name.html">Name</a>) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Name</span>, desc : String = <span class="s">&quot;&quot;</span>, &build : <a href="../Cake/Env.html">Env</a> -> )
+
+        <a class="method-permalink" href="#target%28name_or_names%3AName%7CArray%28Name%29%2Cdeps%3AArray%28Name%29%3D%5B%5DofName%2Cdesc%3AString%3D%26quot%3B%26quot%3B%2C%26build%3AEnv-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Defines a new target.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/cakefile/cake/blob/39273904858e229fd1d66526a78169ee82b982e8/src/cake/dsl.cr#L25" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

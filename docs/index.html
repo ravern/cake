@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "";
+</script>
+
+  <meta id="repository-name" content="github.com/cakefile/cake">
+  <title>README - github.com/cakefile/cake</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="github.com/cakefile/cake/Cake" data-name="cake">
+      <a href="Cake.html">Cake</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/BuildError" data-name="cake::builderror">
+      <a href="Cake/BuildError.html">BuildError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/cakefile/cake/Cake/DSL" data-name="cake::dsl">
+      <a href="Cake/DSL.html">DSL</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/DSL/Name" data-name="cake::dsl::name">
+      <a href="Cake/DSL/Name.html">Name</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/Env" data-name="cake::env">
+      <a href="Cake/Env.html">Env</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/Error" data-name="cake::error">
+      <a href="Cake/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/NotFoundError" data-name="cake::notfounderror">
+      <a href="Cake/NotFoundError.html">NotFoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/RunError" data-name="cake::runerror">
+      <a href="Cake/RunError.html">RunError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/Target" data-name="cake::target">
+      <a href="Cake/Target.html">Target</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/cakefile/cake/Cake/ValidationError" data-name="cake::validationerror">
+      <a href="Cake/ValidationError.html">ValidationError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1>Cake</h1>
+
+<p><a href="https://travis-ci.org/cakefile/cake" target="_blank"><img src="https://travis-ci.org/cakefile/cake.svg?branch=master" alt="TravisCI"/></a></p>
+
+<p><a href="https://cakefile.xyz" target="_blank"><img src="https://avatars2.githubusercontent.com/u/40494794?s=200&v=4" alt="Logo"/></a></p>
+
+<p>Build utility for Crystal.</p>
+
+<p>Since we write our programs in Crystal, it is not too far fetched to write our
+build tasks in Crystal too. Furthermore, Crystal libraries and frameworks can
+be used also, which is sometimes beneficial.</p>
+
+<p><em>This tool does not intend to be compatible with Rake. It is simply a build
+utility similar to Make.</em></p>
+
+<h2>Installation</h2>
+
+<p><code>cake</code> does not build an executable. Instead, a simple <code>alias</code> should be defined
+in <code>.bash_profile</code>. Common names for the file include <code>cakefile.cr</code>, <code>cakefile</code>
+or <code>Cakefile</code>.</p>
+
+<pre><code class="language-bash">alias cake="crystal cakefile.cr --"</code></pre>
+
+<h2>Development</h2>
+
+<p>When developing <code>cake</code>, it needs to be installed in its own <code>lib</code> folder. Thus,
+symlinks can be used to "install" it in the <code>lib</code> folder..</p>
+
+<pre><code class="language-bash">$ cd lib/
+$ ln -s ../src/cake
+$ ln -s ../src/cake.cr</code></pre>
+
+<h2>Usage</h2>
+
+<p><code>cake</code> must first be installed as a development dependency using <code>shards
+install</code>.</p>
+
+<pre><code class="language-yaml">development_dependencies:
+  cake:
+    git: https://github.com/cakefile/cake.git
+    branch: master</code></pre>
+
+<p>The targets have to be specified in a file. The following shows a simple
+<code>Cakefile</code>.</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;cake&quot;</span>
+
+default <span class="n">:two</span>
+
+phony <span class="n">:one</span>
+target <span class="n">:one</span>, desc: <span class="s">&quot;Being first isn&#39;t everything&quot;</span> <span class="k">do</span> <span class="o">|</span>env<span class="o">|</span>
+  run <span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;Or is it really?&quot;</span>]
+<span class="k">end</span>
+
+phony <span class="n">:two</span>
+target <span class="n">:two</span>, deps: [<span class="n">:one</span>], desc: <span class="s">&quot;Being the second is nothing&quot;</span> <span class="k">do</span> <span class="o">|</span>env<span class="o">|</span>
+  run <span class="s">&quot;echo&quot;</span>, [<span class="s">&quot;Or so it was...&quot;</span>]
+<span class="k">end</span>
+
+<span class="t">Cake</span>.run</code></pre>
+
+<p><code>cake</code> can be used to build the targets. Ensure that it is run in the same
+directory as the <code>Cakefile</code>.</p>
+
+<pre><code class="language-bash"># Builds target one
+$ cake one
+echo 'Or is it really?'
+Or is it really?
+
+# Builds target two and target one (dependency)
+$ cake two
+echo 'Or is it really?'
+Or is it really?
+echo 'Or so it was...'
+Or so it was...
+
+# `cake` alone builds the default target
+$ cake
+echo 'Or is it really?'
+Or is it really?
+echo 'Or so it was...'
+Or so it was...
+
+# Verbose flag can print more information
+$ cake -v
+Building target one...
+echo 'Or is it really?'
+Or is it really?
+Building target two...
+echo 'Or so it was...'
+Or so it was...</code></pre>
+</div>
+</body>
+</html>
