@@ -2,7 +2,7 @@
 
 [![TravisCI](https://travis-ci.org/ravernkoh/cake.svg?branch=master)](https://travis-ci.org/ravernkoh/cake)
 
-[![Logo](https://avatars2.githubusercontent.com/u/40494794?s=200&v=4)](https://ravernkoh.github.io/cake)
+[![Logo](https://raw.githubusercontent.com/ravernkoh/cake/80440118ce0319900fe03b563f63a1d1ca14e638/assets/logo.png)](https://ravernkoh.me/cake)
 
 Build utility for Crystal.
 
